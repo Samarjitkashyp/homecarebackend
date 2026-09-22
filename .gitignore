@@ -1,0 +1,5 @@
+*.sql
+config/database.php
+setup.php
+.env
+*.log

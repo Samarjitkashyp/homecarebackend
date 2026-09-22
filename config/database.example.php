@@ -1,10 +1,11 @@
 <?php
-// config/database.php - PDO MySQL connection (XAMPP defaults)
+// config/database.php - Copy this to database.php and fill in your credentials
+// DO NOT commit database.php to version control
 
 define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'homecare_db');
-define('DB_USER', 'root');
-define('DB_PASS', '');          // XAMPP default root password is empty
+define('DB_USER', 'your_db_user');
+define('DB_PASS', 'your_db_password');
 define('DB_CHARSET', 'utf8mb4');
 
 function db(): PDO
@@ -28,7 +29,7 @@ function db(): PDO
         header('Content-Type: application/json');
         echo json_encode([
             'status'  => false,
-            'message' => 'Database connection failed: ' . $e->getMessage(),
+            'message' => 'Database connection failed',
             'data'    => null,
         ]);
         exit;

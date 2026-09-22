@@ -7,10 +7,24 @@ require_once __DIR__ . '/database.php';
 // ------------------------------------------------------------
 // CORS (allow the Flutter app / web to call us)
 // ------------------------------------------------------------
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Debug');
+$allowed_origins = [
+    'https://homecare.digihiveassam.com',
+    'http://localhost',
+    'http://10.0.2.2',
+];
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($origin, $allowed_origins, true)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+} else {
+    header('Access-Control-Allow-Origin: https://homecare.digihiveassam.com');
+}
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
 header('Content-Type: application/json; charset=utf-8');
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('X-XSS-Protection: 1; mode=block');
+header('Referrer-Policy: strict-origin-when-cross-origin');
 
 // Pre-flight
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
