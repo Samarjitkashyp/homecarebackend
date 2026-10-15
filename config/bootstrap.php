@@ -3,6 +3,7 @@
 // Shared bootstrap for every API endpoint: CORS, JSON helpers, auth.
 
 require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/password.php';
 
 // ------------------------------------------------------------
 // CORS (allow the Flutter app / web to call us)

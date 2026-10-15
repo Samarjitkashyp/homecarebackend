@@ -16,7 +16,7 @@ $stmt = db()->prepare('SELECT * FROM users WHERE email = ? LIMIT 1');
 $stmt->execute([$email]);
 $user = $stmt->fetch();
 
-if (!$user || !password_verify($password, $user['password'])) {
+if (!$user || !verify_user_password($user, $password)) {
     fail('Invalid email or password', 401);
 }
 
