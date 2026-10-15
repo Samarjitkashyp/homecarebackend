@@ -1,6 +1,7 @@
 <?php
 // admin/includes/auth.php - session auth for the web admin panel
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../config/password.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -12,7 +13,7 @@ function admin_login(string $email, string $password): bool
     $stmt->execute([$email]);
     $u = $stmt->fetch();
 
-    if ($u && password_verify($password, $u['password'])) {
+    if ($u && verify_user_password($u, $password)) {
         session_regenerate_id(true);
         $_SESSION['admin'] = [
             'id'    => (int) $u['id'],
